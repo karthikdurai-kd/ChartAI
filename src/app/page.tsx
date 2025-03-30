@@ -65,7 +65,6 @@ export default function Home() {
       const fetchedChartType = response.data.chartType.trim();
 
       setChartType(fetchedChartType); // Update chart type got from LLM
-      console.log("Response from LLM:", response);
     } catch (error) {
       setErrorMessage("Error fetching chart suggestions");
       setOpenSnackbar(true);

@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChartAI
 
-## Getting Started
+### 📊 AI-Powered CSV Chart Selector
 
-First, run the development server:
+This project allows users to upload a CSV file and utilizes AI to suggest an appropriate chart type based on the uploaded data. Users can select columns to include in the chart, which is then built instantly. The application is developed using Next.js, D3.js, Material UI, and Papaparse for seamless data visualization and interactivity.
 
-```bash
+---
+
+## 🚀 Features
+
+✅ **AI-Suggested Chart Type** – Automatically recommends a chart type based on CSV data.  
+✅ **CSV Upload & Parsing** – Handles structured data input using Papaparse.  
+✅ **Interactive D3.js Bar Chart** – Displays real-time data visualization with smooth animations.  
+✅ **Tooltips & Hover Effects** – Provides additional insights with an intuitive UI.  
+✅ **Custom Column Selection** – Allows users to map data fields for flexibility.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js, TypeScript
+- **UI Components**: Material UI
+- **Charting Library**: D3.js
+- **CSV Parsing**: Papaparse
+- **AI Integration**: Google Gemini AI
+
+---
+
+## 🎯 How It Works
+
+1️⃣ **Upload a CSV File**
+
+- Ensure the CSV has a structured format with headers.
+
+2️⃣ **AI-Suggested Chart Type**
+
+- The application analyzes the dataset and recommends the best visualization type.
+
+3️⃣ **Select Data Columns**
+
+- Choose which columns to use for labels and values.
+
+4️⃣ **Generate a Chart**
+
+- The chart is rendered dynamically using **D3.js**.
+
+5️⃣ **Interactive Experience**
+
+- Hover over bars to view tooltips with precise data points.
+
+---
+
+## 🏗️ Installation & Setup
+
+```sh
+# Clone the repository
+git clone https://github.com/karthikdurai-kd/ChartAI.git
+
+# Navigate to the project folder
+cd ChartAI
+
+# Install dependencies
+npm install
+
+# Create a .env.local file and add your Google Gemini API key
+touch .env.local
+echo "GEMINI_API_KEY=your_actual_gemini_api_key" >> .env.local
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
