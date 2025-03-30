@@ -1,10 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
-
-interface ChartData {
-  label: string;
-  value: number;
-}
+import { ChartData } from "../utils/chartType";
 
 interface BarChartProps {
   data: ChartData[];
@@ -17,6 +13,7 @@ const BarChart: React.FC<BarChartProps> = ({
   labelColumn,
   valueColumn,
 }) => {
+  console.log("BarChart data:", data);
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -36,14 +33,14 @@ const BarChart: React.FC<BarChartProps> = ({
     // Scale for the x-axis
     const xScale = d3
       .scaleBand()
-      .domain(data.map((d) => d.label))
+      .domain(data.map((d) => String(d[labelColumn]))) // Convert to string
       .range([0, chartWidth])
       .padding(0.2);
 
     // Scale for the y-axis
     const yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.value) ?? 0])
+      .domain([0, d3.max(data, (d) => Number(d[valueColumn])) ?? 0])
       .range([chartHeight, 0]);
 
     // Group for the chart
@@ -56,10 +53,10 @@ const BarChart: React.FC<BarChartProps> = ({
       .data(data)
       .enter()
       .append("rect")
-      .attr("x", (d) => xScale(d.label) || 0)
-      .attr("y", (d) => yScale(d.value) || 0)
+      .attr("x", (d) => xScale(String(d[labelColumn])) || 0)
+      .attr("y", (d) => yScale(Number(d[valueColumn])) || 0)
       .attr("width", xScale.bandwidth())
-      .attr("height", (d) => chartHeight - yScale(d.value))
+      .attr("height", (d) => chartHeight - yScale(Number(d[valueColumn])))
       .attr("fill", "steelblue")
       .attr("class", "bar")
       .style("transition", "all 0.3s ease");
@@ -132,7 +129,11 @@ const BarChart: React.FC<BarChartProps> = ({
       .on("mouseover", (event, d) => {
         tooltip
           .style("display", "block")
-          .html(`${labelColumn}: ${d.label}<br/>${valueColumn}: ${d.value}`)
+          .html(
+            `${labelColumn}: ${String(
+              (d as ChartData)[labelColumn]
+            )}<br/>${valueColumn}: ${String((d as ChartData)[valueColumn])}`
+          )
           .style("left", `${event.pageX + 5}px`)
           .style("top", `${event.pageY - 28}px`);
       })

@@ -14,10 +14,10 @@ import {
   Alert,
 } from "@mui/material";
 import Papa from "papaparse";
-
-interface ChartData {
-  [key: string]: string | number;
-}
+import LineChart from "./components/LineChart";
+import PieChart from "./components/PieChart";
+import ScatterPlot from "./components/ScatterPlot";
+import { ChartData } from "./utils/chartType";
 
 export default function Home() {
   const [data, setData] = useState<ChartData[]>([]);
@@ -51,6 +51,7 @@ export default function Home() {
         fetchChartSuggestion(result.data);
       },
       error: (error) => {
+        console.error("Error parsing CSV file:", error);
         setLoading(false);
         setErrorMessage("Error parsing CSV file");
         setOpenSnackbar(true);
@@ -66,6 +67,7 @@ export default function Home() {
 
       setChartType(fetchedChartType); // Update chart type got from LLM
     } catch (error) {
+      console.error("Error fetching chart suggestions:", error);
       setErrorMessage("Error fetching chart suggestions");
       setOpenSnackbar(true);
     }
@@ -135,18 +137,22 @@ export default function Home() {
       {chartType && !loading && <p>Suggested Chart: {chartType}</p>}
 
       {/* Render BarChart */}
-      {chartType === "Bar" && labelColumn && valueColumn && !loading && (
-        <div style={{ marginTop: "30px" }}>
-          <BarChart
-            data={data.map((row) => ({
-              label: String(row[labelColumn]),
-              value: Number(row[valueColumn]),
-            }))}
-            labelColumn={labelColumn}
-            valueColumn={valueColumn}
-          />
-        </div>
+      {chartType === "Bar" && (
+        <BarChart
+          data={data}
+          labelColumn={labelColumn}
+          valueColumn={valueColumn}
+        />
       )}
+      {chartType === "Line" && (
+        <LineChart
+          data={data}
+          labelColumn={labelColumn}
+          valueColumn={valueColumn}
+        />
+      )}
+      {chartType === "Pie" && <PieChart data={data} />}
+      {chartType === "Scatter" && <ScatterPlot data={data} />}
 
       {/* Snackbar for error handling */}
       <Snackbar
