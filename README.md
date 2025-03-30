@@ -10,7 +10,7 @@ This project allows users to upload a CSV file and utilizes AI to suggest an app
 
 ✅ **AI-Suggested Chart Type** – Automatically recommends a chart type based on CSV data.  
 ✅ **CSV Upload & Parsing** – Handles structured data input using Papaparse.  
-✅ **Interactive D3.js Bar Chart** – Displays real-time data visualization with smooth animations.  
+✅ **Interactive D3.js Charts** – Displays real-time data visualization with smooth animations.  
 ✅ **Tooltips & Hover Effects** – Provides additional insights with an intuitive UI.  
 ✅ **Custom Column Selection** – Allows users to map data fields for flexibility.
 
